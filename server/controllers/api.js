@@ -4,16 +4,15 @@ const leaderboard = async (req, res) => {
     try {
         console.log('Leaderboard requested')
 
-        data = {
-            'leaderboards': []
-        }
+        leaderboards = []
+
 
         const players = await player.find()
         for (var i = 0; i < players.length; i++) {
-            data['leaderboards'].push(players[i])
+            leaderboards.push(players[i])
         }
 
-        return res.status(200).json(data)
+        return res.status(200).json(leaderboards)
     } catch (error) {
         console.log(error)
         return res.status(400).json({ 'error': 'exception thrown' })
@@ -52,14 +51,14 @@ const deletePlayer = async (req, res) => {
         const doc = await player.findById(req.params.id)
 
         if (!doc)
-            return res.status(400).json({'error': 'corresponding pwmId does not exist'})
+            return res.status(400).json({ 'error': 'corresponding pwmId does not exist' })
 
         await doc.remove()
 
         return res.status(201).json(doc)
     } catch (error) {
         console.log(error)
-        return res.status(400).json({'error': 'exception thrown'})
+        return res.status(400).json({ 'error': 'exception thrown' })
     }
 }
 

@@ -8,3 +8,4 @@ router.post("/api/updatescore", apiController.newScore);
 router.delete("/api/removescore/:id", apiController.deletePlayer);
 
 module.exports = router;
+
